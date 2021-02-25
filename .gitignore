@@ -3,6 +3,7 @@
 .emacs.desktop.lock
 .mc-lists.el
 .org-id-locations
+amx-items
 auto-save-list/
 backups/
 bookmarks
