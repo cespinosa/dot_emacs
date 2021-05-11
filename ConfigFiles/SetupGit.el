@@ -3,7 +3,6 @@
 
 (use-package magit
   :config
-
   ;; Refresh `magit-status' after saving a buffer
   (add-hook 'after-save-hook #'magit-after-save-refresh-status)
   )
@@ -12,6 +11,8 @@
   )
 
 (use-package diff-hl
+  :bind
+  ("C-c g s" . magit-status)
   :init
   (global-diff-hl-mode)
   )
