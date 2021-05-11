@@ -18,6 +18,7 @@
 
 (require 'SetupOptimizations)
 (require 'SetupTheme)
+(require 'SetupEditor)
 (require 'SetupGit)
 (require 'SetupHighlight)
 (require 'SetupSmartparents)
