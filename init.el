@@ -19,6 +19,7 @@
 (require 'SetupOptimizations)
 (require 'SetupTheme)
 (require 'SetupEditor)
+(require 'SetupEvil)
 (require 'SetupFlycheck)
 (require 'SetupGit)
 (require 'SetupHighlight)
