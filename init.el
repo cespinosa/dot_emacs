@@ -23,6 +23,8 @@
 (require 'SetupFlycheck)
 (require 'SetupGit)
 (require 'SetupHighlight)
+(require 'SetupIvy)
 (require 'SetupPython)
 (require 'SetupSmartparents)
 (require 'SetupVisual)
+(require 'SetupWhichkey)
