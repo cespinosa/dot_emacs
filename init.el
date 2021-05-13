@@ -28,3 +28,4 @@
 (require 'SetupSmartparents)
 (require 'SetupVisual)
 (require 'SetupWhichkey)
+(require 'SetupWindows)
