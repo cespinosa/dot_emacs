@@ -1,1 +1,95 @@
-# My Emacs configuration files
+* My Emacs configuration files
+This config files are heavily based on [[https://github.com/CSRaghunandan/.emacs.d][Rag .emacs.d]]
+** Compile Emacs28 from source
+
+*** Dependencies needed to compile Emacs
+  - ~automake~, ~gcc~, ~make~: to build Emacs
+  - ~imagemagick7~: for imagemagick intregration
+  - ~librsvg~: for rendering ~SVG~ files in emacs
+  - ~mailutils~: for mailutils integration in emacs
+  - ~gnutls~: for security
+  - ~gtk3~: library for Gtk3
+  - ~dbus~: library for integration of ~dbus~ with emacs
+  - ~texinfo~: needed for documentation
+  - ~libpng~, ~libjpeg~, ~libxpm~, ~giflib~, ~libtiff~: media dependencies
+*** Optional/recommended dependencies
+  - [[https://cmake.org/][CMake]]: needed for ~vterm.el~ package
+  - ~libvterm~: needed for ~vterm.el~ package
+  - [[https://github.com/watchexec/watchexec][watchexec]]: needed for watching for file changes for packages  and running build to update the packages. This is needed for ~straight.el~
+  - [[https://github.com/direnv/direnv][direnv]]: for getting ~direnv~ integration with Emacs
+  - [[https://github.com/BurntSushi/ripgrep][ripgrep]]: for faster search integration in Emacs
+  - [[https://github.com/sharkdp/fd/][fd]]: integrate ~fd~ into emacs for faster file searches
+  - [[https://poppler.freedesktop.org/][poppler]]: PDF rendering library. Needed for [[https://github.com/politza/pdf-tools][pdf-tools]]
+  
+** Installing and configuring Emacs
+
+*** Install *Emacs* from source
+  
+#+BEGIN_SRC bash
+git clone --depth 1 https://github.com/emacs-mirror/emacs
+cd emacs
+sh autogen.sh
+./configure --with-modules --with-rsvg --with-dbus \
+     --without-pop --with-xft --with-xml2 --with-libotf --with-mailutils \
+     --without-toolkit-scroll-bars --without-xaw3d \
+      CFLAGS="-O3 -mtune=native -march=native -fomit-frame-pointer"
+# replace -jX, X is the number of cores in your machine
+make -j8
+make install
+#+END_SRC
+
+*** Install *emacs* native compilation branch
+   
+#+BEGIN_SRC bash
+git clone --depth 1 https://github.com/emacs-mirror/emacs -b feature/native-comp
+cd emacs
+sh autogen.sh
+./configure --with-modules --with-rsvg --with-dbus \
+     --without-pop --with-xft --with-xml2 --with-libotf --with-mailutils \
+     --with-native-compilation --without-toolkit-scroll-bars --without-xaw3d \
+      CFLAGS="-O3 -mtune=native -march=native -fomit-frame-pointer"
+# replace -jX, X is the number of cores in your machine
+make -j8
+make install  
+#+END_SRC
+Add the below line to ~early-init.el~
+            #+BEGIN_SRC emacs-lisp
+;; comment out this line if you are not using emacs native compilation branch
+;; native compile elisp files as they are loaded
+(setq comp-deferred-compilation t)
+#+END_SRC
+
+** After install
+
+- Enable systemd service
+      #+BEGIN_SRC bash
+systemctl --user enable emacs --now
+#+END_SRC
+- Change the ~emacs.desktop~ file to launch ~emacsclient~, its located in
+      ~/usr/local/share/applications/emacs.desktop~:
+            #+BEGIN_SRC conf
+[Desktop Entry]
+Name=Emacs
+GenericName=Text Editor
+Comment=Edit text
+MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+Exec=/usr/local/bin/emacsclient -c -a '' %F
+Icon=emacs
+Type=Application
+Terminal=false
+Categories=Development;TextEditor;
+StartupWMClass=Emacs
+Keywords=Text;Editor;
+#+END_SRC
+- Add EDITOR an VISUAL env variables to shell config file:
+       #+BEGIN_SRC bash
+export EDITOR="emacsclient -n -a \"\""
+export VISUAL="emacsclient -n -a \"\""
+#+END_SRC 
+- Defines aliases:
+        #+BEGIN_SRC bash
+alias ec='emacsclient -nc -a ""'
+alias eg='emacsclient -n -a ""'
+alias et='TERM=xterm-256color emacsclient -t -a ""'
+#+END_SRC
+Now you can open emacs by conecting to the emacs daemon using emacsclient using: ~ec~, You can open a file on the existing emacs frame by: ~eg file-name~
