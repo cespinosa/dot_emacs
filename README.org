@@ -1,6 +1,7 @@
 * My Emacs configuration files
 This config files are heavily based on [[https://github.com/CSRaghunandan/.emacs.d][Rag .emacs.d]]
 ** Compile Emacs28 from source
+
 *** Dependencies needed to compile Emacs
   - ~automake~, ~gcc~, ~make~: to build Emacs
   - ~imagemagick7~: for imagemagick intregration
@@ -19,8 +20,11 @@ This config files are heavily based on [[https://github.com/CSRaghunandan/.emacs
   - [[https://github.com/BurntSushi/ripgrep][ripgrep]]: for faster search integration in Emacs
   - [[https://github.com/sharkdp/fd/][fd]]: integrate ~fd~ into emacs for faster file searches
   - [[https://poppler.freedesktop.org/][poppler]]: PDF rendering library. Needed for [[https://github.com/politza/pdf-tools][pdf-tools]]
-**Installing and configuring Emacs
-  *** Install *Emacs* from source
+  
+** Installing and configuring Emacs
+
+*** Install *Emacs* from source
+  
 #+BEGIN_SRC bash
 git clone --depth 1 master https://github.com/emacs-mirror/emacs
 cd emacs
@@ -33,7 +37,9 @@ sh autogen.sh
 make -j8
 make install
 #+END_SRC
-   *** Install *emacs* native compilation branch
+
+*** Install *emacs* native compilation branch
+   
 #+BEGIN_SRC bash
 git clone --depth 1 master https://github.com/emacs-mirror/emacs -b feature/native-comp
 cd emacs
@@ -54,6 +60,7 @@ Add the below line to ~early-init.el~
 #+END_SRC
 
 ** After install
+
 - Enable systemd service
       #+BEGIN_SRC bash
 systemctl --user enable emacs --now
@@ -74,12 +81,12 @@ Categories=Development;TextEditor;
 StartupWMClass=Emacs
 Keywords=Text;Editor;
 #+END_SRC
-  - Add EDITOR an VISUAL env variables to shell config file:
+- Add EDITOR an VISUAL env variables to shell config file:
        #+BEGIN_SRC bash
 export EDITOR="emacsclient -n -a \"\""
 export VISUAL="emacsclient -n -a \"\""
 #+END_SRC 
-  - Defines aliases:
+- Defines aliases:
         #+BEGIN_SRC bash
 alias ec='emacsclient -nc -a ""'
 alias eg='emacsclient -n -a ""'
