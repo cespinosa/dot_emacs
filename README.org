@@ -26,7 +26,7 @@ This config files are heavily based on [[https://github.com/CSRaghunandan/.emacs
 *** Install *Emacs* from source
   
 #+BEGIN_SRC bash
-git clone --depth 1 master https://github.com/emacs-mirror/emacs
+git clone --depth 1 https://github.com/emacs-mirror/emacs
 cd emacs
 sh autogen.sh
 ./configure --with-modules --with-rsvg --with-dbus \
@@ -41,12 +41,12 @@ make install
 *** Install *emacs* native compilation branch
    
 #+BEGIN_SRC bash
-git clone --depth 1 master https://github.com/emacs-mirror/emacs -b feature/native-comp
+git clone --depth 1 https://github.com/emacs-mirror/emacs -b feature/native-comp
 cd emacs
 sh autogen.sh
 ./configure --with-modules --with-rsvg --with-dbus \
      --without-pop --with-xft --with-xml2 --with-libotf --with-mailutils \
-     --with-nativecomp --without-toolkit-scroll-bars --without-xaw3d \
+     --with-native-compilation --without-toolkit-scroll-bars --without-xaw3d \
       CFLAGS="-O3 -mtune=native -march=native -fomit-frame-pointer"
 # replace -jX, X is the number of cores in your machine
 make -j8
