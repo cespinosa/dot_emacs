@@ -23,6 +23,7 @@
 (require 'SetupFlycheck)
 (require 'SetupGit)
 (require 'SetupHighlight)
+(require 'SetupIBuffer)
 (require 'SetupIvy)
 (require 'SetupModeline)
 (require 'SetupPython)
