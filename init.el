@@ -17,6 +17,8 @@
 (load (locate-user-emacs-file "SetupPackage.el") nil :nomessage)
 
 (require 'SetupOptimizations)
+(require 'SetupNoLittering)
+(require 'SetupOrg)
 (require 'SetupTheme)
 (require 'SetupEditor)
 (require 'SetupEvil)
@@ -26,14 +28,16 @@
 (require 'SetupHighlight)
 (require 'SetupIBuffer)
 (require 'SetupIvy)
+(require 'SetupCounsel)
 (require 'SetupModeline)
 (require 'SetupProject)
 (require 'SetupPython)
 (require 'SetupSmartparents)
 (require 'SetupVisual)
+(require 'SetupVterm)
 (require 'SetupWhichkey)
 (require 'SetupWindows)
 
 ;; start emacs server only it has not already been started
-(require 'server)
-(unless (server-running-p) (server-start))
+;; (require 'server)
+;; (unless (server-running-p) (server-start))

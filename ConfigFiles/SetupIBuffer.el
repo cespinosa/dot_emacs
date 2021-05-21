@@ -27,4 +27,22 @@
   (all-the-icons-ibuffer-mode 1)
   )
 
+;; Group ibuffer's list by project root
+(use-package ibuffer-projectile
+  :functions all-the-icons-octicon ibuffer-do-sort-by-alphabetic
+  :hook ((ibuffer . (lambda()
+                      (ibuffer-projectile-set-filter-groups)
+                      (unless (eq ibuffer-sorting-mode 'alphabetic)
+                        (ibuffer-do-sort-by-alphabetic)))))
+  :config
+  (setq ibuffer-projectile-prefix
+        (concat
+         (all-the-icons-octicon "file-directory"
+                                :face ibuffer-filter-group-name-face
+                                :v-adjust 0.0
+                                :height 1.0)
+         " "
+          "Project: "))
+  )
+
 (provide 'SetupIBuffer)

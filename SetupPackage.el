@@ -23,6 +23,14 @@
 
 ;; install use-package
 (straight-use-package 'use-package)
+
+;;;;  package.el
+;;; so package-list-packages includes them
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+
+
 ;; enable imenu support for `use-package'
 (setq use-package-enable-imenu-support t)
 
