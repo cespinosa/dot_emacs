@@ -20,6 +20,7 @@
 (require 'SetupNoLittering)
 (require 'SetupOrg)
 (require 'SetupTheme)
+(require 'SetupDashboard)
 (require 'SetupEditor)
 (require 'SetupEvil)
 (require 'SetupFlycheck)
