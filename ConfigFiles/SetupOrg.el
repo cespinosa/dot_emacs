@@ -37,9 +37,15 @@ Inserted by installing 'org-mode' or when a release is made."
 
 ;; (straight-use-package 'org) ; or org-plus-contrib if desired
 
+(use-package ob-async
+  :config
+  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+  )
+
 (use-package org
   :hook
-  ((org-mode . org-num-mode)
+  (
+   ;; (org-mode . org-num-mode)
    (org-mode . (lambda ();; this will make sure auto-fill works for org-mode
                  (setq-local comment-auto-fill-only-comments nil)
                  (setq-local display-line-numbers-type 'absolute)
@@ -55,15 +61,41 @@ Inserted by installing 'org-mode' or when a release is made."
   (setq org-export-backends '(ascii html latex md odt))
 
   :config
-
+  (setq org-hide-emphasis-markers t)
+  ;; pomodoro implementation in org
+  ;; https://github.com/lolownia/org-pomodoro
+  (use-package org-pomodoro
+    :after org-agenda
+    :custom
+    (org-pomodoro-ask-upon-killing t)
+    (org-pomodoro-format "%s") ;;     
+    (org-pomodoro-short-break-format "%s")
+    (org-pomodoro-long-break-format  "%s")
+    :custom-face
+    (org-pomodoro-mode-line ((t (:foreground "#ff5555"))))
+    (org-pomodoro-mode-line-break   ((t (:foreground "#50fa7b"))))
+    :bind
+    (:map org-agenda-mode-map
+          ("p" . org-pomodoro)
+    )
+    )
+  (setq org-src-fontify-natively t)
+  (setq org-ellipsis "⤵")
+  (setq org-hide-leading-stars t)
   ;; org agenda files
-  (setq org-agenda-files '("/home/espinosa/Google_Drive/fractaliusfciencias/Org/agenda/inbox.org"
-                           "/home/espinosa/Google_Drive/fractaliusfciencias/Org/agenda/projects.org"))
+  (setq org-agenda-files '("/home/espinosa/GoogleDrive/fractaliusfciencias/Org/agenda/inbox.org"
+                           "/home/espinosa/GoogleDrive/fractaliusfciencias/Org/agenda/projects.org"))
 
   (setq org-agenda-skip-scheduled-if-done t
         org-agenda-skip-deadline-if-done t
         org-habit-show-habits t)
-
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-agenda-current-time-string "← now")
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((latex . t)
+     (python . t))
+   )
   ;; set defaults tags for org
   (setq org-tag-persistent-alist '(("@EMAIL" . ?e)
                                    ("@WRITE" . ?W)
@@ -76,19 +108,19 @@ Inserted by installing 'org-mode' or when a release is made."
 
   (setq org-capture-templates
         '(("t" "Todo [inbox]" entry
-          (file+headline "~/Google_Drive/fractaliusfciencias/Org/agenda/inbox.org" "Tasks")
+          (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/inbox.org" "Tasks")
           (file "~/.emacs.d/etc/org-capture-templates/todo.txt"))
           ("b" "Add a book to read list" entry
-           (file+headline "~/Google_Drive/fractaliusfciencias/Org/agenda/books.org" "Read list")
+           (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/books.org" "Read list")
            (file "~/.emacs.d/etc/org-capture-template/book.txt"))
           ("p" "Add a new project" entry
-           (file+headline "~/Google_Drive/fractaliusfciencias/Org/agenda/projects.org" "Projects")
+           (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/projects.org" "Projects")
            (file "~/.emacs.d/etc/org-capture-templates/projects.txt"))
           ("R" "Add a new reference" entry
-           (file+headline "~/Google_Drive/fractaliusfciencias/Org/agenda/references.org" "References")
+           (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/references.org" "References")
            (file "~/.emacs.d/etc/org-capture-templates/reference.txt"))
           ("e" "Add a new code example" entry
-           (file+headline "~/Google_Drive/fractaliusfciencias/Org/agenda/examples.org" "Examples")
+           (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/examples.org" "Examples")
            (file "~/.emacs.d/etc/org-capture-templates/example.txt")) 
           )
         )
@@ -113,7 +145,12 @@ This variable is buffer local.")
   ;; variable as long as its value is t or nil. That way you are not prompted
   ;; to add that to `safe-local-variable-values' in custom.el.
   (put 'modi/org-table-enable-buffer-wide-recalculation 'safe-local-variable #'booleanp)  
+
+  ;; Pretty bullets
+  (use-package org-superstar
+    :hook (org-mode . org-superstar-mode))
   )
+
 
 ;; A journaling tool with org-mode: `org-journal'
 ;; https://github.com/bastibe/org-journal
@@ -138,7 +175,54 @@ This variable is buffer local.")
   :hook ((org-journal-mode . (lambda ()
                                (visual-line-mode -1))))
   :config
-  (setq org-journal-dir "~/Google_Drive/fractaliusfciencias/Org/Diary")
+  (setq org-journal-dir "~/GoogleDrive/fractaliusfciencias/Org/Diary")
+  )
+
+(use-package hide-mode-line)
+
+(defun efs/presentation-setup ()
+  ;; Hide the mode line
+  (hide-mode-line-mode 1)
+
+  ;; Display images inline
+  (org-display-inline-images) ;; Can also use org-startup-with-inline-images
+
+  ;; Scale the text.  The next line is for basic scaling:
+  (setq text-scale-mode-amount 3)
+  (text-scale-mode 1))
+
+  ;; This option is more advanced, allows you to scale other faces too
+  ;; (setq-local face-remapping-alist '((default (:height 2.0) variable-pitch)
+  ;;                                    (org-verbatim (:height 1.75) org-verbatim)
+  ;;                                    (org-block (:height 1.25) org-block))))
+
+(defun efs/presentation-end ()
+  ;; Show the mode line again
+  (hide-mode-line-mode 0)
+
+  ;; Turn off text scale mode (or use the next line if you didn't use text-scale-mode)
+  (text-scale-mode 0))
+
+  ;; If you use face-remapping-alist, this clears the scaling:
+  ;; (setq-local face-remapping-alist '((default variable-pitch default))))
+
+(use-package org-tree-slide
+  :hook
+  ((org-tree-slide-play . efs/presentation-setup)
+   (org-tree-slide-stop . efs/presentation-end))
+  :custom
+  (org-tree-slide-slide-in-effect t)
+  (org-tree-slide-activate-message "Presentation started!")
+  (org-tree-slide-deactivate-message "Presentation finished!")
+  (org-tree-slide-header t)
+  (org-tree-slide-breadcrumbs " > ")
+  (org-image-actual-width nil)
+  :bind
+  ((:map org-tree-slide-mode-map
+         ("C-h" . org-tree-slide-move-previous-tree)
+         ("C-l" . org-tree-slide-move-next-tree)
+    ))
+  
   )
 
 
