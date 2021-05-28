@@ -40,5 +40,5 @@
 (require 'SetupWindows)
 
 ;; start emacs server only it has not already been started
-;; (require 'server)
-;; (unless (server-running-p) (server-start))
+(require 'server)
+(unless (server-running-p) (server-start))
