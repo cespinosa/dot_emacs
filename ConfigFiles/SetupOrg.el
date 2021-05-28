@@ -42,6 +42,29 @@ Inserted by installing 'org-mode' or when a release is made."
   (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
   )
 
+(defun my-org-screenshot()
+  "Take a screenshot into a time stamped unique-named file in the
+   same directory as the org-buffer and insert a link to this file."
+  (interactive)
+  (org-display-inline-images)
+  (setq filename
+        (concat
+         (make-temp-name
+          (concat (file-name-nondirectory (buffer-file-name))
+                  "_imgs/"
+                  (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
+  (unless (file-exists-p (file-name-directory filename))
+    (make-directory (file-name-directory filename)))
+  ; take screenshot
+  (if (eq system-type 'darwin)
+      (call-process "screencapture" nil nil nil "-i" filename))
+  (if (eq system-type 'gnu/linux)
+      (call-process "import" nil nil nil filename))
+  ; insert into file if correctly taken
+  (if (file-exists-p filename)
+    (insert (concat "[[file:" filename "]]")))  
+  )
+
 (use-package org
   :hook
   (
@@ -59,7 +82,13 @@ Inserted by installing 'org-mode' or when a release is made."
   ;; Set my default org-export backends. This variable need to be set before
   ;; org.el is loaded.
   (setq org-export-backends '(ascii html latex md odt))
-
+  :custom
+  (org-src-fontify-natively t) 
+  (org-confirm-babel-evaluate nil)
+  (org-clock-out-remove-zero-time-clocks t)
+  (org-startup-folded 'content)
+  (org-columns-default-format "%50ITEM(Task) %5TODO(Todo) %10Effort(Effort){:} %10CLOCKSUM(Clock) %2PRIORITY %TAGS")
+  
   :config
   (setq org-hide-emphasis-markers t)
   ;; pomodoro implementation in org
@@ -79,17 +108,15 @@ Inserted by installing 'org-mode' or when a release is made."
           ("p" . org-pomodoro)
     )
     )
-  (setq org-src-fontify-natively t)
+  ;; (setq org-src-fontify-natively t)
   (setq org-ellipsis "⤵")
   (setq org-hide-leading-stars t)
   ;; org agenda files
   (setq org-agenda-files '("/home/espinosa/GoogleDrive/fractaliusfciencias/Org/agenda/inbox.org"
                            "/home/espinosa/GoogleDrive/fractaliusfciencias/Org/agenda/projects.org"))
-
   (setq org-agenda-skip-scheduled-if-done t
         org-agenda-skip-deadline-if-done t
         org-habit-show-habits t)
-  (setq org-confirm-babel-evaluate nil)
   (setq org-agenda-current-time-string "← now")
   (org-babel-do-load-languages
    'org-babel-load-languages
