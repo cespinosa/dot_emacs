@@ -30,6 +30,7 @@
 (require 'SetupIBuffer)
 (require 'SetupIvy)
 (require 'SetupCounsel)
+(require 'SetupLatex)
 (require 'SetupModeline)
 (require 'SetupProject)
 (require 'SetupPython)
