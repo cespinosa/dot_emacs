@@ -4,7 +4,7 @@
 (use-package vterm
   :if (executable-find "cmake")
   :bind (
-         ("C-c o t" . vterm)
+         ("C-c t t" . vterm)
          :map vterm-mode-map
               ("C-y" . vterm-yank))
   :config
