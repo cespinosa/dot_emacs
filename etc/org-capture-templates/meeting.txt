@@ -7,4 +7,4 @@
   :LOGBOOK:
   - State \"MEETING\" from \"\"         %U
   :END:
-  %^T--%^T"
+  %^T--%^T

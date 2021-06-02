@@ -8,4 +8,4 @@
   :LOGBOOK:
   - State \"VMEETING\" from \"\"         %U
   :END:
-  %^T--%^T"
+  %^T--%^T

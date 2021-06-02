@@ -181,11 +181,13 @@ Inserted by installing 'org-mode' or when a release is made."
           ("em" "Online Meeting" entry
            (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/todo.org" "VMeetings")
            (file "~/.emacs.d/etc/org-capture-templates/vmeeting.txt")
+           :empty-lines 1
            )
           ;; Meeting (m) Meeting template
           ("eM" "Meeting" entry
            (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/todo.org" "Meetings")
            (file "~/.emacs.d/etc/org-capture-templates/meeting.txt")
+           :empty-lines 1
            )
           
           ("b" "Add a book to read list" entry
@@ -255,6 +257,11 @@ This variable is buffer local.")
                                (visual-line-mode -1))))
   :config
   (setq org-journal-dir "~/GoogleDrive/fractaliusfciencias/Org/Diary")
+  )
+
+(use-package org-super-agenda
+  :after org
+  :config (org-super-agenda-mode)
   )
 
 (use-package hide-mode-line)
