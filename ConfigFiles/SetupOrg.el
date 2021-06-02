@@ -73,6 +73,10 @@ Inserted by installing 'org-mode' or when a release is made."
                  (setq-local comment-auto-fill-only-comments nil)
                  (setq-local display-line-numbers-type 'absolute)
                  (setq-local org-use-speed-commands t))))
+  :bind
+  (("C-c o c" . org-capture)
+   ("C-c o a" . org-agenda)
+   )
   :preface
   ;; Modules that should always be loaded together with org.el
   ;; `org-modules' default: (ol-w3m ol-bbdb ol-bibtex ol-docview ol-gnus ol-info
@@ -88,6 +92,21 @@ Inserted by installing 'org-mode' or when a release is made."
   (org-clock-out-remove-zero-time-clocks t)
   (org-startup-folded 'content)
   (org-columns-default-format "%50ITEM(Task) %5TODO(Todo) %10Effort(Effort){:} %10CLOCKSUM(Clock) %2PRIORITY %TAGS")
+  (org-agenda-columns-add-appointments-to-effort-sum t)
+  (org-agenda-span 'day)
+  (org-agenda-log-mode-items (quote (closed clock)))
+  (org-agenda-clockreport-parameter-plist
+   '(:maxlevel 5 :block t :tstart t :tend t :emphasize t :link t :narrow 80 :indent t :formula nil :timestamp t :level 5 :tcolumns nil :formatter nil))
+  (org-global-properties (quote ((
+                                  "Effort_ALL" . "00:05 00:10 00:15 00:30 01:00 01:30 02:00 02:30 03:00"))))
+  :custom-face
+  (org-link ((t (:foreground "#ebe087" :underline t))))
+  (org-list-dt ((t (:foreground "#bd93f9"))))
+  (org-special-keyword ((t (:foreground "#6272a4"))))
+  (org-todo ((t (:background "#272934" :foreground "#51fa7b" :weight bold))))
+  (org-document-title ((t (:foreground "#f1fa8c" :weight bold))))
+  (org-done ((t (:background "#373844" :foreground "#216933" :strike-through nil :weight bold))))
+  (org-footnote ((t (:foreground "#76e0f3"))))
   
   :config
   (setq org-hide-emphasis-markers t)
@@ -108,11 +127,26 @@ Inserted by installing 'org-mode' or when a release is made."
           ("p" . org-pomodoro)
     )
     )
+  (setq org-todo-keywords
+        '(
+          ;; Sequence for TASKS
+          ;; TODO means it's an item that needs addressing
+          ;; WAITING means it's dependent on something else happening
+          ;; CANCELLED means it's no longer necessary to finish
+          ;; DONE means it's complete
+          (sequence "TODO(t@/!)" "WAITING(w@/!)" "CANCELLED(x@/!)" "DONE(d@/!)")
+
+          ;; Sequence for EVENTS
+          ;; MEETING means a real time meeting, i.e. at work
+          ;; VMEETING means a virtual meeting
+          (sequence "MEETING(m@/!)" "VMEETING(v@/!)" "|")
+          )
+        )
   ;; (setq org-src-fontify-natively t)
   (setq org-ellipsis "⤵")
   (setq org-hide-leading-stars t)
   ;; org agenda files
-  (setq org-agenda-files '("/home/espinosa/GoogleDrive/fractaliusfciencias/Org/agenda/inbox.org"
+  (setq org-agenda-files '("/home/espinosa/GoogleDrive/fractaliusfciencias/Org/agenda/todo.org"
                            "/home/espinosa/GoogleDrive/fractaliusfciencias/Org/agenda/projects.org"))
   (setq org-agenda-skip-scheduled-if-done t
         org-agenda-skip-deadline-if-done t
@@ -134,21 +168,39 @@ Inserted by installing 'org-mode' or when a release is made."
                                    ("@READ" . ?r)))
 
   (setq org-capture-templates
-        '(("t" "Todo [inbox]" entry
-          (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/inbox.org" "Tasks")
+        '(
+          ;; Templates fot the tasks
+          ("t" "Task")
+          ;; TODO (t) templates
+          ("tt" "General Task" entry
+          (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/todo.org" "Tasks")
           (file "~/.emacs.d/etc/org-capture-templates/todo.txt"))
+
+          ("e" "Events")
+          ;; Online Meeting (m) Meeting template
+          ("em" "Online Meeting" entry
+           (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/todo.org" "VMeetings")
+           (file "~/.emacs.d/etc/org-capture-templates/vmeeting.txt")
+           )
+          ;; Meeting (m) Meeting template
+          ("eM" "Meeting" entry
+           (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/todo.org" "Meetings")
+           (file "~/.emacs.d/etc/org-capture-templates/meeting.txt")
+           )
+          
           ("b" "Add a book to read list" entry
            (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/books.org" "Read list")
            (file "~/.emacs.d/etc/org-capture-template/book.txt"))
-          ("p" "Add a new project" entry
+          ("P" "Add a new project" entry
            (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/projects.org" "Projects")
-           (file "~/.emacs.d/etc/org-capture-templates/projects.txt"))
+           (file "~/.emacs.d/etc/org-capture-templates/project.txt")
+           )
           ("R" "Add a new reference" entry
            (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/references.org" "References")
            (file "~/.emacs.d/etc/org-capture-templates/reference.txt"))
-          ("e" "Add a new code example" entry
-           (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/examples.org" "Examples")
-           (file "~/.emacs.d/etc/org-capture-templates/example.txt")) 
+          ;; ("e" "Add a new code example" entry
+          ;;  (file+headline "~/GoogleDrive/fractaliusfciencias/Org/agenda/examples.org" "Examples")
+          ;;  (file "~/.emacs.d/etc/org-capture-templates/example.txt")) 
           )
         )
 
