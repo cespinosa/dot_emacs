@@ -1,18 +1,15 @@
-* TODO %^{Description}
+* TODO %^{Project title} :%^G:
   :PROPERTIES:
   :CREATED:    %U
-  :SUBJECT: %^{subject}
-  :GOAL:    %^{goal}
   :END:
   :LOGBOOK:
-  - Note taken on %U \\
-    %^{Notes for the task}
   :END:
   :RESOURCES:
   :END:
+  %^{Project description}
+** TODO Literature review
+** TODO %?
+** TODO Summary
+** TODO Reports
+** Ideas
 
-  + REQUIREMENTS:
-    %^{requirements}
-
-
-** TODO %^{task1}

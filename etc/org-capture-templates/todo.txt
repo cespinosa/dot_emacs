@@ -1,13 +1,8 @@
-* TODO %^{Description}
+* TODO %^{Description} :%^G:
   :PROPERTIES:
+  :Note:
   :CREATED:    %U
   :END:
   :LOGBOOK:
-  - Note taken on %U \\
-    %^{Notes for the task}
-  :END:
-  :RESOURCES:
   :END:
 
-  + Next steps:
-    - [ ] %^{next steps}
