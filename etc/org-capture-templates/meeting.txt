@@ -1,0 +1,10 @@
+* MEETING %?
+  CLOSED: %^U
+  :PROPERTIES:
+  :Attend:
+  :Note:
+  :END:
+  :LOGBOOK:
+  - State \"MEETING\" from \"\"         %U
+  :END:
+  %^T--%^T"

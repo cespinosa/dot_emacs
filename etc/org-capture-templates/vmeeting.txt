@@ -1,0 +1,11 @@
+* VMEETING %?
+  CLOSED: %^U
+  :PROPERTIES:
+  :Attend:
+  :Note:
+  :Url:
+  :END:
+  :LOGBOOK:
+  - State \"VMEETING\" from \"\"         %U
+  :END:
+  %^T--%^T"
