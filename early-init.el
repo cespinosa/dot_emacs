@@ -7,7 +7,7 @@
 
 ;; comment out this line if you are not using emacs native compilation branch
 ;; native compile elisp files as they are loaded
-(setq comp-deferred-compilation t)
+;; (setq comp-deferred-compilation t)
 
 ;; Prevent the glimpse of un-styled Emacs by disabling these UI elements early.
 ;; (push '(menu-bar-lines . 0) default-frame-alist)
