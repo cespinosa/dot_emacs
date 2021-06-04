@@ -142,6 +142,8 @@ Inserted by installing 'org-mode' or when a release is made."
           (sequence "MEETING(m@/!)" "VMEETING(v@/!)" "|")
           )
         )
+  (setq org-todo-keyword-faces
+        '(("VMEETING" . (:background "#272934" :foreground "#51fa7b" :weight bold))))
   ;; (setq org-src-fontify-natively t)
   (setq org-ellipsis "⤵")
   (setq org-hide-leading-stars t)
@@ -232,7 +234,6 @@ This variable is buffer local.")
     :hook (org-mode . org-superstar-mode))
   )
 
-
 ;; A journaling tool with org-mode: `org-journal'
 ;; https://github.com/bastibe/org-journal
 ;; Quick summary:
@@ -310,6 +311,5 @@ This variable is buffer local.")
     ))
   
   )
-
 
 (provide 'SetupOrg)
