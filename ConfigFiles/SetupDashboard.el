@@ -8,6 +8,7 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-navigator t)
+  (setq dashboard-week-agenda t)
   (setq dashboard-items '((recents  . 5)
                         (bookmarks . 5)
                         (projects . 5)
