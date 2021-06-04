@@ -1,6 +1,8 @@
 ;; Evil Config
 
 (use-package evil
+  :init
+  (setq evil-want-keybinding nil)
   :config
   (evil-mode 1)
 
@@ -14,6 +16,20 @@
      '(textobjects insert navigation additional shift todo heading))
     (add-hook 'org-mode-hook (lambda () (evil-org-mode)))
     )
+  )
+
+;; (use-package evil-nerd-commenter
+;;   )
+
+(use-package evil-commentary
+  :config
+  (evil-commentary-mode)
+  )
+
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init)
   )
 
 (provide 'SetupEvil)
