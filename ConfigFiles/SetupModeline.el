@@ -4,6 +4,11 @@
 ;;  all-the-icons package
 (use-package all-the-icons)
 
+(use-package all-the-icons-dired
+  :after all-the-icons
+  :hook (dired-mode . all-the-icons-dired-mode)
+  )
+
 ;; https://github.com/tarsius/minions
 ;; A minor-mode menu for the mode line
 (use-package minions
