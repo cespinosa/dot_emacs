@@ -17,4 +17,8 @@
   (global-diff-hl-mode)
   )
 
+(use-package magit-gitflow
+  :hook (magit-mode . turn-on-magit-gitflow)
+  )
+
 (provide 'SetupGit)

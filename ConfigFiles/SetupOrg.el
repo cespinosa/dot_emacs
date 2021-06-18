@@ -157,8 +157,12 @@ Inserted by installing 'org-mode' or when a release is made."
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((latex . t)
-     (python . t))
+     (python . t)
+     (plantuml . t))
    )
+
+  (add-to-list
+   'org-src-lang-modes '("plantuml" . plantuml))
   ;; set defaults tags for org
   (setq org-tag-persistent-alist '(("@EMAIL" . ?e)
                                    ("@WRITE" . ?W)
@@ -207,6 +211,9 @@ Inserted by installing 'org-mode' or when a release is made."
           ;;  (file "~/.emacs.d/etc/org-capture-templates/example.txt")) 
           )
         )
+
+  (add-to-list 'org-structure-template-alist
+               '("p" . "src python :results output :exports both\n\n"))
 
   ;; settings for org-refile
   (setq org-refile-use-outline-path 'file
@@ -292,6 +299,15 @@ This variable is buffer local.")
 
   ;; If you use face-remapping-alist, this clears the scaling:
   ;; (setq-local face-remapping-alist '((default variable-pitch default))))
+
+;; plantuml configuration
+(use-package ob-plantuml
+  :straight nil
+  :commands
+  (org-babel-execute:plantuml)
+  :config
+  (setq org-plantuml-jar-path (expand-file-name "~/.emacs.d/plantuml.jar"))
+  )
 
 (use-package org-tree-slide
   :hook

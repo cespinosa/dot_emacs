@@ -32,6 +32,7 @@
 (require 'SetupCounsel)
 (require 'SetupLatex)
 (require 'SetupModeline)
+(require 'SetupPlantuml)
 (require 'SetupProject)
 (require 'SetupPython)
 (require 'SetupSmartparents)
