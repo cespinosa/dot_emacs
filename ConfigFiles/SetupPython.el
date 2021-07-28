@@ -5,6 +5,7 @@
 (use-package conda
   :init
   (setq conda-anaconda-home "/home/espinosa/anaconda3/")
+  (setq conda-env-home-directory "/home/espinosa/anaconda3/")
   (setq conda-default-env "base")
   :hook
   (python-mode . (lambda () (conda-env-activate "base")))
