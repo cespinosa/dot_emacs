@@ -46,9 +46,9 @@
           (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
           (t             . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${year:4} ${author:36} ${title:*}")))
   (setq bibtex-completion-bibliography my/bib-file-location)
-  (setq bibtex-completion-notes-path "~/Google_Drive/fractaliusfciencias/Bib/ref.org")
+  (setq bibtex-completion-notes-path "~/GoogleDrive/fractaliusfciencias/Bib/ref.org")
   (setq bibtex-completion-pdf-field "File")
-  (setq bibtex-completion-library-path '("~/Google_Drive/fractaliusfciencias/Bib/Papers" "~/Google_Drive/fractaliusfciencias/Bib/Libros"))
+  (setq bibtex-completion-library-path '("~/GoogleDrive/fractaliusfciencias/Bib/Papers" "~/Google_Drive/fractaliusfciencias/Bib/Libros"))
   (setq ivy-bibtex-default-action #'ivy-bibtex-insert-citation)
   (ivy-set-actions
    'ivy-bibtex
