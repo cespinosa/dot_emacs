@@ -29,6 +29,7 @@
 (use-package evil-collection
   :after evil
   :config
+  (setq evil-collection-mode-list '(dired))
   (evil-collection-init)
   )
 
