@@ -29,7 +29,7 @@
 (use-package evil-collection
   :after evil
   :config
-  (setq evil-collection-mode-list '(dashboard dired ibuffer magit))
+  (setq evil-collection-mode-list '(dashboard dired ibuffer magit vterm))
   (evil-collection-init)
   )
 
