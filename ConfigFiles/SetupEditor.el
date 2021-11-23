@@ -22,4 +22,9 @@
   :hook (after-init . global-hungry-delete-mode)
   :config (setq-default hungry-delete-chars-to-skip " \t\f\v"))
 
+;; Undo-tree: tree like navigation for undo/redo in emacs
+(use-package undo-tree
+  :config (global-undo-tree-mode 1)
+ )
+
 (provide 'SetupEditor)
