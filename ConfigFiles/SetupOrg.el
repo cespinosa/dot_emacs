@@ -93,7 +93,7 @@ Inserted by installing 'org-mode' or when a release is made."
   (org-startup-folded 'content)
   (org-columns-default-format "%50ITEM(Task) %5TODO(Todo) %10Effort(Effort){:} %10CLOCKSUM(Clock) %2PRIORITY %TAGS")
   (org-agenda-columns-add-appointments-to-effort-sum t)
-  (org-agenda-span 'day)
+  (org-agenda-span 'week)
   (org-agenda-log-mode-items (quote (closed clock)))
   (org-agenda-clockreport-parameter-plist
    '(:maxlevel 5 :block t :tstart t :tend t :emphasize t :link t :narrow 80 :indent t :formula nil :timestamp t :level 5 :tcolumns nil :formatter nil))
@@ -119,6 +119,11 @@ Inserted by installing 'org-mode' or when a release is made."
     (org-pomodoro-format "%s") ;;     
     (org-pomodoro-short-break-format "%s")
     (org-pomodoro-long-break-format  "%s")
+    ;; (org-pomodoro-start-sound (expand-file-name "~/.emacs.d/manual-addons/sounds/bell_alert.wav"))
+    (org-pomodoro-finished-sound (expand-file-name "~/.emacs.d/manual-addons/sounds/bell_alert.wav"))
+    ;; (org-pomodoro-overtime-sound (expand-file-name "~/.emacs.d/manual-addons/sounds/ring_bell.wav"))
+    (org-pomodoro-short-break-sound (expand-file-name "~/.emacs.d/manual-addons/sounds/bell_alert.wav"))
+    (org-pomodoro-long-break-sound (expand-file-name "~/.emacs.d/manual-addons/sounds/ring_bell.wav"))
     :custom-face
     (org-pomodoro-mode-line ((t (:foreground "#ff5555"))))
     (org-pomodoro-mode-line-break   ((t (:foreground "#50fa7b"))))
