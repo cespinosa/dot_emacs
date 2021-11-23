@@ -53,15 +53,17 @@
   (ivy-set-actions
    'ivy-bibtex
    '(("p" ivy-bibtex-open-any "Open PDF, URL, or DOI")
-     ("e" ivy-bibtex-edit-notes "Edit notes")))
-  (defun bibtex-completion-open-pdf-external (keys &optional fallback-action)
-    (let ((bibtex-completion-pdf-open-function
-           (lambda (fpath) (start-process "evince" "*helm-bibtex-evince*" "/usr/bin/evince" fpath))))
-      (bibtex-completion-open-pdf fallback-action)))
-  (ivy-bibtex-ivify-action bibtex-completion-open-pdf-external ivy-bibtex-open-pdf-external)
-  (ivy-add-actions
-   'ivy-bibtex
-   '(("P" ivy-bibtex-open-pdf-external "Open PDF file in external viewer (if present)")))
+     ("e" ivy-bibtex-edit-notes "Edit notes")
+     ("P" ivy-bibtex-open-pdf "Open PDF file (if present)"))
+   )
+  ;; (defun bibtex-completion-open-pdf-external (keys &optional fallback-action)
+  ;;   (let ((bibtex-completion-pdf-open-function
+  ;;          (lambda (fpath) (start-process "evince" "*helm-bibtex-evince*" "/usr/bin/evince" fpath))))
+  ;;     (bibtex-completion-open-pdf fallback-action)))
+  ;; (ivy-bibtex-ivify-action bibtex-completion-open-pdf-external ivy-bibtex-open-pdf-external)
+  ;; (ivy-add-actions
+  ;;  'ivy-bibtex
+  ;;  '(("P" ivy-bibtex-open-pdf-external "Open PDF file in external viewer (if present)")))
   (setq bibtex-completion-pdf-symbol "⌘")
   (setq bibtex-completion-notes-symbol "✎")
 )
