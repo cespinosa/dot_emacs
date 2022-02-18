@@ -333,6 +333,9 @@ This variable is buffer local.")
   
   )
 
+;; Increase size of LaTeX fragment previews
+(plist-put org-format-latex-options :scale 2)
+
 ;; Org Roam
 (use-package org-roam
   :defer 1
