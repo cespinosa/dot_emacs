@@ -31,6 +31,7 @@
 (require 'SetupIvy)
 (require 'SetupCounsel)
 (require 'SetupLatex)
+(require 'SetupMarkdown)
 (require 'SetupModeline)
 (require 'SetupPlantuml)
 (require 'SetupProject)
