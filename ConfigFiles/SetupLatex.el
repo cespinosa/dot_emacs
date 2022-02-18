@@ -6,8 +6,8 @@
   :straight auctex
   :mode ("\\.tex\\'" . latex-mode)
   :config
-  (setq TeX-auto-save t)
   (setq TeX-parse-self t)
+  (setq TeX-auto-save t)
   (setq-default TeX-master nil)
   (add-hook 'LaTeX-mode-hook
             (lambda ()
